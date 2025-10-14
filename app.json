@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "RedAngels' Catering Creator",
+    "slug": "redangels-catering-creator",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#b91c1c"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {},
+    "plugins": [
+      "expo-secure-store"
+    ]
+  }
+}
