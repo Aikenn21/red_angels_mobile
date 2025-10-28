@@ -26,11 +26,18 @@ export default function ProfileScreen() {
   const pickAvatar = async () => {
     const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!perm.granted) return Alert.alert('Permission required', 'Please allow photo library access');
-    const res = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ImagePicker.MediaTypeOptions.Images, allowsEditing: true, quality: 0.8 });
+
+    const res = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: 'images', // Fixed: Changed from MediaTypeOptions.Images
+      allowsEditing: true,
+      quality: 0.8
+    });
+
     if (!res.canceled && res.assets?.[0]) {
       try {
-        const up = await upload(res.assets[0].uri);
-        setAvatarUrl(up.url);
+        const url = await upload(res.assets[0].uri);
+        setAvatarUrl(url);
+        Alert.alert('Success', 'Avatar updated successfully!');
       } catch (e) {
         Alert.alert('Upload failed', e.message);
       }

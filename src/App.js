@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import WelcomeScreen from './screens/auth/WelcomeScreen';
 import LoginScreen from './screens/auth/LoginScreen';
 import RegisterScreen from './screens/auth/RegisterScreen';
 import UserHome from './screens/user/UserHome';
@@ -86,8 +87,9 @@ function RootNavigator() {
       <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#b91c1c' }, headerTintColor: '#fff' }}>
         {!user && (
           <>
+            <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
             <Stack.Screen name="Login" component={LoginScreen} options={{ title: "RedAngels' Login" }} />
-            <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} options={{ title: "Create Account" }} />
           </>
         )}
         {user?.role === 'USER' && (

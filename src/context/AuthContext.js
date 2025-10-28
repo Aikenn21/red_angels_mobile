@@ -7,6 +7,7 @@ const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
+  const [serverStatus, setServerStatus] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,6 +31,7 @@ export function AuthProvider({ children }) {
     api.setToken(data.token);
     await SecureStore.setItemAsync('token', data.token);
     setUser(data.user);
+    setServerStatus(data.serverStatus || null);
   };
 
   const register = async (payload) => {
@@ -43,7 +45,7 @@ export function AuthProvider({ children }) {
     await SecureStore.deleteItemAsync('token');
   };
 
-  return <AuthContext.Provider value={{ token, user, login, logout, register, loading }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ token, user, serverStatus, login, logout, register, loading }}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth() {
